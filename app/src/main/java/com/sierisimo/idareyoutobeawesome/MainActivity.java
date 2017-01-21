@@ -1,7 +1,6 @@
 package com.sierisimo.idareyoutobeawesome;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -14,5 +13,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+    }
+
+    private void launchProfileActivity(){
+
     }
 }

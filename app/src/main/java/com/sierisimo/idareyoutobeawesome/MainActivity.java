@@ -13,21 +13,18 @@ import com.sierisimo.idareyoutobeawesome.listeners.DrawerItemClickListener;
  */
 
 public class MainActivity extends AppCompatActivity {
-
-    private String[] mTitles;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTitles = new String[]{"Title One", "Title Two", "Title Three"};
+        String[] mTitles = new String[]{"Title One", "Title Two", "Title Three"};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.item_drawer_list, mTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener(getApplicationContext()));
     }
 

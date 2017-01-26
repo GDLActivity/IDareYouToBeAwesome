@@ -20,8 +20,17 @@ android {
 
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "CONFIG_MOCKS", "false"
+        }
+
+        debug {
+            debuggable true
+            buildConfigField "boolean", "CONFIG_MOCKS", "true"
         }
     }
 

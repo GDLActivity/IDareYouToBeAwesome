@@ -3,5 +3,5 @@
     android:id="@+id/tvDrawerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Item title"
+    android:text="@string/title_dummy"
     android:textSize="20sp" />

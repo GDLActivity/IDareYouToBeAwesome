@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private String[] mTitles;
     private String[] mChallenges;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         mTitles = new String[]{"Title One", "Title Two", "Title Three"};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(getApplicationContext()));
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         mChallenges = new String[]{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};

@@ -11,11 +11,11 @@ import com.sierisimo.idareyoutobeawesome.R;
  * Created by sierisimo on 1/31/17.
  */
 
-public class DareViewHolder extends RecyclerView.ViewHolder {
+public class DareBasicoViewHolder extends RecyclerView.ViewHolder {
     private CardView cardView;
     private TextView textView;
 
-    public DareViewHolder(View itemView) {
+    public DareBasicoViewHolder(View itemView) {
         super(itemView);
         cardView = (CardView) itemView.findViewById(R.id.card_view);
         textView = (TextView) itemView.findViewById(R.id.tvChallenge);

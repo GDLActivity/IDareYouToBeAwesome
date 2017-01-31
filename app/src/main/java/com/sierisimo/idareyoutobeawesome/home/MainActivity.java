@@ -1,4 +1,4 @@
-package com.sierisimo.idareyoutobeawesome;
+package com.sierisimo.idareyoutobeawesome.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,31 +7,25 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.sierisimo.idareyoutobeawesome.activities.AboutActivity;
-import com.sierisimo.idareyoutobeawesome.activities.DareDetailActivity;
-import com.sierisimo.idareyoutobeawesome.adapters.RecyclerViewChallengeAdapter;
+import com.sierisimo.idareyoutobeawesome.R;
+import com.sierisimo.idareyoutobeawesome.about.AboutActivity;
+import com.sierisimo.idareyoutobeawesome.dares.DareDetailActivity;
+import com.sierisimo.idareyoutobeawesome.dares.RecyclerDareAdapter;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
 /**
  * Created by sierisimo on 1/21/17.
+ *
  */
-
 public class MainActivity extends AppCompatActivity {
-
-    private String[] mTitles;
-    private String[] mChallenges;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerViewChallengeAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,17 +38,20 @@ public class MainActivity extends AppCompatActivity {
     private void initActivity() {
         setupToolbar();
 
-        String[] mTitles = new String[]{"Title One", "Title Two", "Title Three"};
+        String[] mChallenges = new String[]{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+
         navigationViewClick();
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-        mChallenges = new String[]{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RecyclerViewChallengeAdapter(mChallenges);
+
+        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(mChallenges);
         mAdapter.setListener(new DareListener() {
             @Override
             public void onDarePressed() {
@@ -66,33 +63,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void navigationViewClick(){
+    public void navigationViewClick() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(!item.isChecked());
 
-                if (item.isChecked())
-                    item.setChecked(false);
-                else
-                    item.setChecked(true);
-
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.title_one:
                         Toast.makeText(getApplicationContext(), "Title One", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
+                        break;
                     case R.id.title_two:
                         Toast.makeText(getApplicationContext(), "Title Two", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    case R.id.title_three:
+                        break;
+                    case R.id.section_about:
                         Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
-                        mDrawerLayout.closeDrawers();
-                        return true;
+                        break;
+                    default:
+                        return false;
                 }
 
-                return false;
+                mDrawerLayout.closeDrawers();
+                return true;
             }
         });
     }
@@ -108,10 +101,5 @@ public class MainActivity extends AppCompatActivity {
             actionbar.setDisplayShowTitleEnabled(true);
             actionbar.setTitle(R.string.title_dummy);
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

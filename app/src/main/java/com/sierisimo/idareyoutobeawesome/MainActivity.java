@@ -1,5 +1,6 @@
 package com.sierisimo.idareyoutobeawesome;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.sierisimo.idareyoutobeawesome.activities.AboutActivity;
 import com.sierisimo.idareyoutobeawesome.adapters.RecyclerViewChallengeAdapter;
 
 /**
@@ -75,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.title_three:
-                        Toast.makeText(getApplicationContext(), "Title Three", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(intent);
                         mDrawerLayout.closeDrawers();
                         return true;
                 }

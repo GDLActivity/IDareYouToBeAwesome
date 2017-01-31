@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sierisimo.idareyoutobeawesome.activities.AboutActivity;
+import com.sierisimo.idareyoutobeawesome.activities.DareDetailActivity;
 import com.sierisimo.idareyoutobeawesome.adapters.RecyclerViewChallengeAdapter;
+import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
 /**
  * Created by sierisimo on 1/21/17.
@@ -53,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewChallengeAdapter(mChallenges);
+        mAdapter.setListener(new DareListener() {
+            @Override
+            public void onDarePressed() {
+                Intent intent = new Intent(MainActivity.this, DareDetailActivity.class);
+                startActivity(intent);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
     }

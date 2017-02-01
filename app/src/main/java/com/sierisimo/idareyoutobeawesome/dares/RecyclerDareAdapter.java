@@ -6,44 +6,45 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sierisimo.idareyoutobeawesome.R;
-import com.sierisimo.idareyoutobeawesome.dares.holders.DareBasicoViewHolder;
+import com.sierisimo.idareyoutobeawesome.dares.holders.DareBasicViewHolder;
+import com.sierisimo.idareyoutobeawesome.data.Dare;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
+
+import java.util.List;
 
 /**
  * Created by Baltazar Rodriguez on 23/01/2017.
+ *
  */
-
-public class RecyclerDareAdapter extends RecyclerView.Adapter<DareBasicoViewHolder> {
-    private String[] list;
+public class RecyclerDareAdapter extends RecyclerView.Adapter<DareBasicViewHolder> {
+    private List<Dare> items;
     private DareListener listener;
 
-    public RecyclerDareAdapter(String[] list) {
-        this.list = list;
-    }
-
-    public void setListener(DareListener listener) {
+    public RecyclerDareAdapter(List<Dare> list, DareListener listener) {
         this.listener = listener;
+        this.items = list;
     }
 
     @Override
-    public DareBasicoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DareBasicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_view, parent, false);
-        return new DareBasicoViewHolder(v);
+        return new DareBasicViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(DareBasicoViewHolder holder, int position) {
-        holder.setText(list[position]);
-        holder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onDarePressed();
-            }
-        });
+    public void onBindViewHolder(DareBasicViewHolder holder, int position) {
+        holder.setText(items.get(position).getTitle());
+        holder.setDareListener(listener);
+    }
+
+    @Override
+    public void onViewRecycled(DareBasicViewHolder holder) {
+        holder.setDareListener(null);
+        super.onViewRecycled(holder);
     }
 
     @Override
     public int getItemCount() {
-        return list.length;
+        return items.size();
     }
 }

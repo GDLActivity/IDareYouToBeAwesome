@@ -17,11 +17,11 @@ import com.sierisimo.idareyoutobeawesome.R;
 import com.sierisimo.idareyoutobeawesome.about.AboutActivity;
 import com.sierisimo.idareyoutobeawesome.dares.DareDetailActivity;
 import com.sierisimo.idareyoutobeawesome.dares.RecyclerDareAdapter;
+import com.sierisimo.idareyoutobeawesome.data.DareProvider;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
 /**
  * Created by sierisimo on 1/21/17.
- *
  */
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private void initActivity() {
         setupToolbar();
 
-        String[] mChallenges = new String[]{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -51,14 +49,15 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(mChallenges);
-        mAdapter.setListener(new DareListener() {
+        DareListener dareListener = new DareListener() {
             @Override
             public void onDarePressed() {
                 Intent intent = new Intent(MainActivity.this, DareDetailActivity.class);
                 startActivity(intent);
             }
-        });
+        };
+
+        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(DareProvider.INSTANCE.getDares(), dareListener);
         mRecyclerView.setAdapter(mAdapter);
 
     }

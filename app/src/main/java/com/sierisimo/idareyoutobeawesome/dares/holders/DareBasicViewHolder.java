@@ -1,6 +1,5 @@
 package com.sierisimo.idareyoutobeawesome.dares.holders;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -19,8 +18,7 @@ public class DareBasicViewHolder extends RecyclerView.ViewHolder implements View
     public DareBasicViewHolder(View itemView) {
         super(itemView);
 
-        CardView cardView = (CardView) itemView.findViewById(R.id.card_view);
-        cardView.setOnClickListener(this);
+        itemView.findViewById(R.id.card_view).setOnClickListener(this);
 
         textView = (TextView) itemView.findViewById(R.id.tvChallenge);
     }
@@ -35,8 +33,8 @@ public class DareBasicViewHolder extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.card_view) {
-            if (listener != null) listener.onDarePressed();
+        if (v.getId() == R.id.card_view && listener != null) {
+            listener.onDarePressed();
         }
     }
 }

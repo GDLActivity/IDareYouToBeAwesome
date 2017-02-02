@@ -7,13 +7,13 @@
             android:id="@+id/title_one"
             android:checked="false"
             android:icon="@drawable/vector_menu_item"
-            android:title="One"/>
+            android:title="@string/title_dummy"/>
 
         <item
             android:id="@+id/title_two"
             android:checked="false"
             android:icon="@drawable/vector_menu_item"
-            android:title="Two"/>
+            android:title="@string/title_dummy"/>
 
         <item
             android:id="@+id/section_about"

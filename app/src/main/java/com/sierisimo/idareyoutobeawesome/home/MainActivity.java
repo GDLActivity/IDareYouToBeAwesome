@@ -24,7 +24,7 @@ import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
  * Created by sierisimo on 1/21/17.
  */
 public class MainActivity extends AppCompatActivity {
-    private DrawerLayout mDrawerLayout;
+    private DrawerLayout drawerLayout;
     private NavigationView mNavigationView;
 
     @Override
@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private void initActivity() {
         setupToolbar();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        navigationViewClick();
+        setupNavigationView();
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void navigationViewClick() {
+    private void setupNavigationView() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                 }
 
-                mDrawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
                 return true;
             }
         });

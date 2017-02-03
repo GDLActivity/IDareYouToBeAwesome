@@ -23,6 +23,7 @@ allprojects {
         jcenter()
         mavenCentral()
     }
+    //buildDir = "C:/tmp/${rootProject.name}/${project.name}"
 }
 
 task clean(type: Delete) {

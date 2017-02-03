@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
@@ -26,11 +27,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "boolean", "CONFIG_MOCKS", "false"
+            buildConfigField "String", "SHARED_PREFERENCES_NAME", '"shPrIDYTBA"'
         }
 
         debug {
             debuggable true
+
             buildConfigField "boolean", "CONFIG_MOCKS", "true"
+            buildConfigField "String", "SHARED_PREFERENCES_NAME", '"sharedPreferencesIDareYou'
         }
     }
 

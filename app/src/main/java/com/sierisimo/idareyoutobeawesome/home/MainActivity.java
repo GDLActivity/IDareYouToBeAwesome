@@ -20,6 +20,8 @@ import com.sierisimo.idareyoutobeawesome.dares.RecyclerDareAdapter;
 import com.sierisimo.idareyoutobeawesome.data.DareProvider;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
+import static com.sierisimo.idareyoutobeawesome.util.KeysKt.EXTRA_DARE_DETAILED;
+
 /**
  * Created by sierisimo on 1/21/17.
  */
@@ -39,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNavigationView = (NavigationView) findViewById(R.id.nv_main_drawer);
 
         setupNavigationView();
 
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_main_dares);
         mRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDarePressed() {
                 Intent intent = new Intent(MainActivity.this, DareDetailActivity.class);
+                intent.putExtra(EXTRA_DARE_DETAILED, "");
                 startActivity(intent);
             }
         };

@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000</color>
+
+    <color name="blue_facebook">#3b5999</color>
+    <color name="blue_twitter">#55acee</color>
+
+    <color name="blue_500">#2196F3</color>
+
+    <color name="red_google">#dd4b39</color>
 </resources>

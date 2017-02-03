@@ -39,7 +39,12 @@ object DareProvider {
 
         //HACK: 2/1/17 This is only a function to take a set of words and put it as part of the info
         val randomWord: () -> String = {
-            val words = listOf("Push ups", "km running", "nights without sleeping", "meals without water", "run naked streets", "smile to unkown persons")
+            val words = listOf("Push ups",
+                    "km running",
+                    "nights without sleeping",
+                    "meals without water",
+                    "run naked streets",
+                    "smile to unkown persons")
 
             words[Random().nextInt(words.size)]
         }

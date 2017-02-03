@@ -10,7 +10,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
  */
 
 public class MyFirebaseIIDService extends FirebaseInstanceIdService {
-
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override
@@ -21,9 +20,4 @@ public class MyFirebaseIIDService extends FirebaseInstanceIdService {
         //Displaying token on logcat
         Log.d(TAG, "Refreshed token: " + refreshedToken);
     }
-
-    private void sendRegistrationToServer(String token) {
-        //You can implement this method to store the token on your server
-    }
-
 }

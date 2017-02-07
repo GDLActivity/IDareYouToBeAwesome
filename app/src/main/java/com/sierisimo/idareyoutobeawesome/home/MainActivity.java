@@ -17,6 +17,7 @@ import com.sierisimo.idareyoutobeawesome.R;
 import com.sierisimo.idareyoutobeawesome.about.AboutActivity;
 import com.sierisimo.idareyoutobeawesome.dares.DareDetailActivity;
 import com.sierisimo.idareyoutobeawesome.dares.RecyclerDareAdapter;
+import com.sierisimo.idareyoutobeawesome.data.Dare;
 import com.sierisimo.idareyoutobeawesome.data.DareProvider;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
@@ -51,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // FIXME: 2/6/17 KILL MEEEEEE!!! THIS PART NEEDS TO BE HANDLED IN A DIFFERENT WAY, MAYBE WITH PRESENTERS OR USING RX
         DareListener dareListener = new DareListener() {
             @Override
-            public void onDarePressed() {
+            public void onDarePressed(Dare dare) {
                 Intent intent = new Intent(MainActivity.this, DareDetailActivity.class);
-                intent.putExtra(EXTRA_DARE_DETAILED, "");
+                intent.putExtra(EXTRA_DARE_DETAILED, dare);
                 startActivity(intent);
             }
         };

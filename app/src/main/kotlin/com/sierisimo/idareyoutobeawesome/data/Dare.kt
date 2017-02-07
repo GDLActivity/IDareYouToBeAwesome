@@ -2,6 +2,7 @@ package com.sierisimo.idareyoutobeawesome.data
 
 import android.support.annotation.IntDef
 import com.sierisimo.idareyoutobeawesome.util.USE_MOCKS
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -25,7 +26,7 @@ object DareStatusValues {
  * This class represent a current Dare fetch by the server
  * This will be used everywhere, it's the main type of object used by viewholders and detail views.
  */
-data class Dare(val id: Long, val title: String, val description: String, val dateCreated: Long, val dateSolved: Long, @DareStatus val currentState: Long)
+data class Dare(val id: Long, val title: String, val description: String, val dateCreated: Long, val dateSolved: Long, @DareStatus val currentState: Long) : Serializable
 
 object DareProvider {
     fun getDares(): List<Dare> {

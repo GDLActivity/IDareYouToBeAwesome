@@ -5,15 +5,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sierisimo.idareyoutobeawesome.R;
+import com.sierisimo.idareyoutobeawesome.data.Dare;
 import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
 
 /**
  * Created by sierisimo on 1/31/17.
  */
-
 public class DareBasicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView textView;
-    private DareListener listener;
+    private OnDareHolderClick listener; // FIXME: 2/6/17 KILL ME
+
+    private Dare dare;
 
     public DareBasicViewHolder(View itemView) {
         super(itemView);
@@ -23,18 +25,28 @@ public class DareBasicViewHolder extends RecyclerView.ViewHolder implements View
         textView = (TextView) itemView.findViewById(R.id.tvChallenge);
     }
 
-    public void setText(String text) {
-        textView.setText(text);
+    public void setDare(Dare dare){
+        this.dare = dare;
+        setText(dare.getTitle());
     }
 
-    public void setDareListener(DareListener listener) {
+    public void setOnDareHolderClickListener(OnDareHolderClick listener) {
         this.listener = listener;
+    }
+
+    public void setText(String text) {
+        textView.setText(text);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.card_view && listener != null) {
-            listener.onDarePressed();
+            listener.onDareViewClick(dare);
         }
+    }
+
+    // FIXME: 2/6/17 LISTENER MUST DIE!
+    public interface OnDareHolderClick {
+        void onDareViewClick(Dare dare);
     }
 }

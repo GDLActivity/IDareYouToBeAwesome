@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Baltazar Rodriguez on 23/01/2017.
  *
  */
-public class RecyclerDareAdapter extends RecyclerView.Adapter<DareBasicViewHolder> {
+public class RecyclerDareAdapter extends RecyclerView.Adapter<DareBasicViewHolder> implements DareBasicViewHolder.OnDareHolderClick {
     private List<Dare> items;
     private DareListener listener;
 
@@ -33,18 +33,25 @@ public class RecyclerDareAdapter extends RecyclerView.Adapter<DareBasicViewHolde
 
     @Override
     public void onBindViewHolder(DareBasicViewHolder holder, int position) {
-        holder.setText(items.get(position).getTitle());
-        holder.setDareListener(listener);
+        holder.setDare(items.get(position));
+        holder.setOnDareHolderClickListener(this);
     }
 
     @Override
     public void onViewRecycled(DareBasicViewHolder holder) {
-        holder.setDareListener(null);
+        holder.setDare(null);
+        holder.setOnDareHolderClickListener(null);
         super.onViewRecycled(holder);
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    // FIXME: 2/6/17 we should kill listeners everywhere
+    @Override
+    public void onDareViewClick(Dare dare) {
+        listener.onDarePressed(dare);
     }
 }

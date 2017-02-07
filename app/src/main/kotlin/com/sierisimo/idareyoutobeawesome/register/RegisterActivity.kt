@@ -1,7 +1,7 @@
 package com.sierisimo.idareyoutobeawesome.register
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_register)
 
         setupToolbar()
-
+        setupForm()
         btn_ac_register_main.setOnClickListener(this)
     }
 
@@ -39,9 +39,35 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setTitle(R.string.title_dummy)
     }
 
+    fun setupForm(){
+        
+    }
+
     override fun onClick(v: View?) {
         when (v) {
-            btn_ac_register_main -> Snackbar.make(findViewById(android.R.id.content), R.string.msg_dummy, Snackbar.LENGTH_SHORT).show()
+            btn_ac_register_main -> if (validate()) startRegister()
         }
+    }
+
+    private fun validate(): Boolean {
+        return if (tiet_ac_register_email.text.toString().isNullOrBlank()) {
+            showError(til_ac_register_email, R.string.error_dummy)
+            false
+        } else if (tiet_ac_register_password.text.toString().isNullOrBlank() || tiet_ac_register_password.text.toString().length < 8) {
+            showError(til_ac_register_password, R.string.error_dummy)
+            false
+        } else if (tiet_ac_register_password_confirm.text.toString().isNullOrBlank() || tiet_ac_register_password.text.toString() != tiet_ac_register_password.text.toString()) {
+            showError(til_ac_register_password_confirm, R.string.error_dummy)
+            false
+        } else true
+    }
+
+    private fun showError(textInputLayout: TextInputLayout, errorId: Int) {
+        textInputLayout.isErrorEnabled = true
+        textInputLayout.error = getString(errorId)
+    }
+
+    private fun startRegister() {
+
     }
 }

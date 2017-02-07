@@ -34,7 +34,7 @@ android {
             debuggable true
 
             buildConfigField "boolean", "CONFIG_MOCKS", "true"
-            buildConfigField "String", "SHARED_PREFERENCES_NAME", '"sharedPreferencesIDareYou'
+            buildConfigField "String", "SHARED_PREFERENCES_NAME", '"sharedPreferencesIDareYou"'
         }
     }
 

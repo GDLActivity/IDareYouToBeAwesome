@@ -13,26 +13,44 @@
         android:background="@android:color/black"
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="About Us"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/text_lorem"
-            android:textSize="17sp" />
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:id="@+id/llAboutApp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About the app"
+                android:textSize="25sp"
+                android:textColor="@color/colorBlack"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:id="@+id/llAboutDevelopers">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About developers"
+                android:textSize="25sp"
+                android:textColor="@color/colorBlack"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

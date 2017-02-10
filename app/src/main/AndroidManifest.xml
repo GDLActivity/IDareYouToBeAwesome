@@ -50,6 +50,10 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".about.AboutAppActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

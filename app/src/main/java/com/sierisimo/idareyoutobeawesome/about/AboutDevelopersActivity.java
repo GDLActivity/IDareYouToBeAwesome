@@ -1,6 +1,5 @@
 package com.sierisimo.idareyoutobeawesome.about;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,42 +7,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.sierisimo.idareyoutobeawesome.R;
 
 /**
- * Created by Baltazar Rodriguez on 30/01/2017.
+ * Created by Baltazar Rodriguez on 10/02/2017.
  */
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutDevelopersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-
+        setContentView(R.layout.activity_about_developers);
         setUpToolbar();
-        setObjects();
-    }
-
-    public void setObjects(){
-        LinearLayout aboutApp = (LinearLayout) findViewById(R.id.llAboutApp);
-        aboutApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AboutActivity.this, AboutAppActivity.class));
-            }
-        });
-
-        LinearLayout aboutDevelopers = (LinearLayout) findViewById(R.id.llAboutDevelopers);
-        aboutDevelopers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AboutActivity.this, AboutDevelopersActivity.class));
-            }
-        });
     }
 
     public void setUpToolbar(){
@@ -53,7 +30,7 @@ public class AboutActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("About");
+            actionBar.setTitle("About developers");
 
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);

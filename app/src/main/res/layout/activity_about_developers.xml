@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sier Violencia"
+                android:text="Ernesto"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"/>
 

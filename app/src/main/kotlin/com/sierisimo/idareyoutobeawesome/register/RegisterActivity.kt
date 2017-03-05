@@ -17,20 +17,13 @@ import com.sierisimo.idareyoutobeawesome.home.MainActivity
 import com.sierisimo.idareyoutobeawesome.util.SH_PREF_BOOL_IS_LOGGED
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener, FirebaseAuth.AuthStateListener {
-    val firebaseAuth = FirebaseAuth.getInstance()
-
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         setupToolbar()
-        btn_ac_register_main.setOnClickListener(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        firebaseAuth.addAuthStateListener(this)
+        setupListeners()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -40,11 +33,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, FirebaseAuth
         }
 
         return true
-    }
-
-    override fun onStop() {
-        firebaseAuth.removeAuthStateListener(this)
-        super.onStop()
     }
 
     fun setupToolbar() {
@@ -57,9 +45,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, FirebaseAuth
         supportActionBar?.setTitle(R.string.title_dummy)
     }
 
+    fun setupListeners() {
+        btn_ac_register_main.setOnClickListener(this)
+    }
+
     override fun onClick(v: View?) {
         when (v) {
-            btn_ac_register_main -> if (validate()) startRegister()
+            btn_ac_register_main -> if (validate()) launchHome()
         }
     }
 
@@ -80,7 +72,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, FirebaseAuth
         textInputLayout.isErrorEnabled = true
         textInputLayout.error = getString(errorId)
     }
-
+/*
     private fun startRegister() {
         firebaseAuth.createUserWithEmailAndPassword(tiet_ac_register_email.text.toString(), tiet_ac_register_password.text.toString())
                 .addOnCompleteListener(this) { task ->
@@ -105,7 +97,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, FirebaseAuth
             Snackbar.make(findViewById(android.R.id.content), ":(", Snackbar.LENGTH_SHORT).show()
         }
     }
-
+*/
     fun launchHome() {
         startActivity(Intent(this, MainActivity::class.java))
     }

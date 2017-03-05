@@ -14,18 +14,29 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        launchNextActivity();
+    }
+
+    private void launchNextActivity(){
+        int timeInMillisecondToWait = 3000;
         Handler mainHandler = new Handler();
         mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Class activityToLaunch;
                 if (getSharedPreferences(BuildConfig.SHARED_PREFERENCES_NAME, MODE_PRIVATE).getBoolean(KeysKt.SH_PREF_BOOL_IS_LOGGED, false)) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    activityToLaunch = MainActivity.class;
                 } else {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    activityToLaunch = LoginActivity.class;
                 }
+                startActivity(new Intent(SplashActivity.this, activityToLaunch));
                 finish();
             }
-        }, 3000);
+        }, timeInMillisecondToWait);
     }
 }

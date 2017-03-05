@@ -16,11 +16,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        setupView()
+        setupClickListeners()
     }
 
-    private fun setupView() {
+    override fun onStart() {
+        super.onStart()
+    }
+
+    private fun setupClickListeners() {
         tv_login_anonymous.setOnClickListener(this)
 
         acb_login_facebook.setOnClickListener(this)

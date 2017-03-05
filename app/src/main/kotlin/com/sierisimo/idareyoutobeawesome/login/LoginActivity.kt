@@ -13,18 +13,6 @@ import com.sierisimo.idareyoutobeawesome.util.ACT_REQ_REGISTER
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-    val authInstance = FirebaseAuth.getInstance()!!
-    val authListener = FirebaseAuth.AuthStateListener {
-        val user = it.currentUser
-        if (user != null) {
-            // User is signed in
-            Log.i("LoginActivity", "onAuthStateChanged:signed_in: ${user.uid}")
-        } else {
-            // User is signed out
-            Log.d("LoginActivity", "onAuthStateChanged:signed_out");
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -39,16 +27,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         acb_login_google.setOnClickListener(this)
         acb_login_twitter.setOnClickListener(this)
         acb_login_email.setOnClickListener(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        authInstance.addAuthStateListener(authListener)
-    }
-
-    override fun onStop() {
-        authInstance?.removeAuthStateListener(authListener)
-        super.onStop()
     }
 
     override fun onClick(v: View?) {

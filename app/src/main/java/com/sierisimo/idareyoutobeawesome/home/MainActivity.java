@@ -28,7 +28,6 @@ import static com.sierisimo.idareyoutobeawesome.util.KeysKt.EXTRA_DARE_DETAILED;
  */
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
-    private NavigationView mNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,44 +39,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void initActivity() {
         setupToolbar();
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.nv_main_drawer);
-
         setupNavigationView();
+        setupRecyclerElements();
+    }
 
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_main_dares);
-        mRecyclerView.setHasFixedSize(true);
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // FIXME: 2/6/17 KILL MEEEEEE!!! THIS PART NEEDS TO BE HANDLED IN A DIFFERENT WAY, MAYBE WITH PRESENTERS OR USING RX
-        DareListener dareListener = new DareListener() {
-            @Override
-            public void onDarePressed(Dare dare) {
-                Intent intent = new Intent(MainActivity.this, DareDetailActivity.class);
-                intent.putExtra(EXTRA_DARE_DETAILED, dare);
-                startActivity(intent);
-            }
-        };
-
-        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(DareProvider.INSTANCE.getDares(), dareListener);
-        mRecyclerView.setAdapter(mAdapter);
-
+        ActionBar actionbar = getSupportActionBar();
+        if (actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setHomeAsUpIndicator(R.drawable.vector_menubar_hamburger);
+            actionbar.setDisplayShowTitleEnabled(true);
+            actionbar.setTitle(R.string.title_dummy);
+        }
     }
 
     private void setupNavigationView() {
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nv_main_drawer);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(!item.isChecked());
 
                 switch (item.getItemId()) {
-                    case R.id.title_one:
+                    case R.id.item_one:
                         Toast.makeText(getApplicationContext(), "Title One", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.title_two:
+                    case R.id.item_two:
                         Toast.makeText(getApplicationContext(), "Title Two", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.section_about:
@@ -94,16 +85,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    private void setupRecyclerElements() {
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_main_dares);
+        mRecyclerView.setHasFixedSize(true);
 
-        ActionBar actionbar = getSupportActionBar();
-        if (actionbar != null) {
-            actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setHomeAsUpIndicator(R.drawable.vector_menubar_hamburger);
-            actionbar.setDisplayShowTitleEnabled(true);
-            actionbar.setTitle(R.string.title_dummy);
-        }
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(DareProvider.INSTANCE.getDares());
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

@@ -4,13 +4,13 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/title_one"
+            android:id="@+id/item_one"
             android:checked="false"
             android:icon="@drawable/vector_menu_item"
             android:title="@string/title_dummy"/>
 
         <item
-            android:id="@+id/title_two"
+            android:id="@+id/item_two"
             android:checked="false"
             android:icon="@drawable/vector_menu_item"
             android:title="@string/title_dummy"/>

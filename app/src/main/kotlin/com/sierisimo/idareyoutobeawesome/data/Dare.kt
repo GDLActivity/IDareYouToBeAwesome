@@ -26,19 +26,20 @@ object DareStatusValues {
  * This class represent a current Dare fetch by the server
  * This will be used everywhere, it's the main type of object used by viewholders and detail views.
  */
-data class Dare(val id: Long, val title: String, val description: String, val dateCreated: Long, val dateSolved: Long, @DareStatus val currentState: Long) : Serializable
+data class Dare(val id: Long,
+                val title: String,
+                val description: String,
+                val dateCreated: Long,
+                val dateSolved: Long,
+                @DareStatus val currentState: Long) : Serializable
 
 object DareProvider {
-    fun getDares(): List<Dare> {
-        return if (USE_MOCKS) getMockDares()
-        else fetchDares()
-    }
+    fun getDares(): List<Dare> = getMockDares()
 
     //HACK: 2/1/17 Fast way to fetch fake data.
     private fun getMockDares(): List<Dare> {
         val listOfDares = mutableListOf<Dare>()
 
-        //HACK: 2/1/17 This is only a function to take a set of words and put it as part of the info
         val randomWord: () -> String = {
             val words = listOf("Push ups",
                     "km running",
@@ -51,12 +52,14 @@ object DareProvider {
         }
 
         (1..15).mapTo(listOfDares) {
-            Dare(it * 1000L, "You have to $it ${randomWord()}", "This is a description to this dare, it involves doing a lot of work", Calendar.getInstance().timeInMillis, -1L, DareStatusValues.PENDING)
+            Dare(it * 1000L,
+                    "You have to $it ${randomWord()}",
+                    "This is a description to this dare, it involves doing a lot of work",
+                    Calendar.getInstance().timeInMillis,
+                    -1L,
+                    DareStatusValues.PENDING)
         }
 
         return listOfDares
     }
-
-    //TODO: 2/1/17 Add the call for firebase...
-    private fun fetchDares(): List<Dare> = emptyList()
 }

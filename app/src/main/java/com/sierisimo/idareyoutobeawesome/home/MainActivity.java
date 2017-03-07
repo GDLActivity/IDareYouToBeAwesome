@@ -9,8 +9,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.sierisimo.idareyoutobeawesome.R;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initActivity();
+        setUpCardViews();
     }
 
     private void initActivity() {
@@ -83,6 +86,33 @@ public class MainActivity extends AppCompatActivity {
 
                 drawerLayout.closeDrawers();
                 return true;
+            }
+        });
+    }
+
+    private void setUpCardViews(){
+        CardView cardViewDaily = (CardView)findViewById(R.id.card_daily_dare);
+        CardView cardViewWeek = (CardView)findViewById(R.id.card_week_dare);
+        CardView cardViewMonth = (CardView)findViewById(R.id.card_month_dare);
+
+        cardViewDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Daily Dare", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cardViewWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Week Dare", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cardViewMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Month Dare", Toast.LENGTH_SHORT).show();
             }
         });
     }

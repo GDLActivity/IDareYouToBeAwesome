@@ -1,27 +1,20 @@
 package com.sierisimo.idareyoutobeawesome.home;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sierisimo.idareyoutobeawesome.R;
 import com.sierisimo.idareyoutobeawesome.about.AboutActivity;
-import com.sierisimo.idareyoutobeawesome.dares.DareDetailActivity;
-import com.sierisimo.idareyoutobeawesome.dares.RecyclerDareAdapter;
-import com.sierisimo.idareyoutobeawesome.data.Dare;
-import com.sierisimo.idareyoutobeawesome.data.DareProvider;
-import com.sierisimo.idareyoutobeawesome.listeners.DareListener;
-
-import static com.sierisimo.idareyoutobeawesome.util.KeysKt.EXTRA_DARE_DETAILED;
 
 /**
  * Created by sierisimo on 1/21/17.
@@ -41,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupNavigationView();
-        setupRecyclerElements();
     }
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         ActionBar actionbar = getSupportActionBar();
@@ -65,15 +58,24 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(!item.isChecked());
 
                 switch (item.getItemId()) {
-                    case R.id.item_one:
-                        Toast.makeText(getApplicationContext(), "Title One", Toast.LENGTH_SHORT).show();
+                    case R.id.item_edit_profile:
+                        Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.item_two:
-                        Toast.makeText(getApplicationContext(), "Title Two", Toast.LENGTH_SHORT).show();
+                    case R.id.item_history:
+                        Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_settings:
+                        Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_friends:
+                        Toast.makeText(getApplicationContext(), "Friends", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.section_about:
                         Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
+                        break;
+                    case R.id.item_exit:
+                        Toast.makeText(getApplicationContext(), "Exit", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         return false;
@@ -85,14 +87,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setupRecyclerElements() {
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_main_dares);
-        mRecyclerView.setHasFixedSize(true);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            openDrawer();
+        return super.onOptionsItemSelected(item);
+    }
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+    private void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
 
-        RecyclerDareAdapter mAdapter = new RecyclerDareAdapter(DareProvider.INSTANCE.getDares());
-        mRecyclerView.setAdapter(mAdapter);
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawers();
+        else
+            super.onBackPressed();
     }
 }

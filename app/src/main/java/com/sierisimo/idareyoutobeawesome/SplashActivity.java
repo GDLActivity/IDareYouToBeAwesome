@@ -14,13 +14,14 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        setVersionText((TextView) findViewById(R.id.tv_splash_version));
+        setVersionText(BuildConfig.VERSION_NAME);
     }
 
     @Override
@@ -29,8 +30,8 @@ public class SplashActivity extends AppCompatActivity {
         launchNextActivity();
     }
 
-    private void setVersionText(TextView textView) {
-        textView.setText(BuildConfig.VERSION_NAME);
+    private void setVersionText(String versionText) {
+        ((TextView) findViewById(R.id.tv_splash_version)).setText(versionText);
     }
 
     private void launchNextActivity() {

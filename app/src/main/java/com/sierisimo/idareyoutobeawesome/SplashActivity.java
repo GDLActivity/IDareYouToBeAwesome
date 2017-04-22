@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.sierisimo.idareyoutobeawesome.home.MainActivity;
 import com.sierisimo.idareyoutobeawesome.login.LoginActivity;
@@ -17,15 +18,25 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        setVersionText((TextView) findViewById(R.id.tv_splash_version));
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         launchNextActivity();
     }
 
-    private void launchNextActivity(){
+    private void setVersionText(TextView textView) {
+        textView.setText(BuildConfig.VERSION_NAME);
+    }
+
+    private void launchNextActivity() {
         int timeInMillisecondToWait = 3000;
-        Handler mainHandler = new Handler();
-        mainHandler.postDelayed(new Runnable() {
+
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Class activityToLaunch;
@@ -34,7 +45,9 @@ public class SplashActivity extends AppCompatActivity {
                 } else {
                     activityToLaunch = LoginActivity.class;
                 }
+
                 startActivity(new Intent(SplashActivity.this, activityToLaunch));
+
                 finish();
             }
         }, timeInMillisecondToWait);
